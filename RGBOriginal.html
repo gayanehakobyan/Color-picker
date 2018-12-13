@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RGB</title>
+	<style>
+		#inputColor{
+			position:absolute;
+			text-align: center;
+			top:5%;
+			left:33%;
+			height: 250px;
+			width: 450px;
+		    border-radius: 25%;
+		    box-shadow: 0 0 10px 2px #888888;
+		    font-size: 25px;
+		}
+		.colors::-webkit-slider-thumb {
+		    -webkit-appearance: none;
+		    appearance: none;
+		    width: 25px;
+		    height: 25px;
+		    border-radius: 50%;
+		    cursor: pointer;
+		}
+		#red::-webkit-slider-thumb {
+		    background: red;
+		}
+		#blue::-webkit-slider-thumb {
+		    background: blue;
+		}
+		#green::-webkit-slider-thumb {
+		    background: green;
+		}
+		.colors {
+		    -webkit-appearance: none;
+		    position:absolute;
+		    height: 15px;
+		    width: 300px;
+		    top:50%;
+		    background: #d3d3d3;
+		    outline: none;
+		    opacity: 0.7;
+		    border-radius: 5px;
+		}
+		.colors:hover {
+		    opacity: 1;
+		}
+		.difcolor{
+			width: 150px;
+			height: 90px;
+			cursor: -webkit-grab;
+		/*	border: 1px solid black;*/
+			display: inline-block;
+			transition: background ease-in 2s;
+		}
+		#myDiv{
+			position: absolute;
+			max-width:1200px;
+			top:70%;
+			left: 8%;
+			transition: width 2s;
+		}
+		#myDiv {transition-timing-function: ease-in;}
+	</style>
+</head>
+<body>
+		<input type="text" placeholder="Color" id="inputColor">
+		<input type="range" id='red'   class="colors"  min="0" max='255' style="left:8%;" value="0">
+		<input type="range" id='green' class="colors"  min="0" max='255' style="left:40%;" value="0">
+		<input type="range" id='blue'  class="colors"  min="0" max='255' style="left:70%;" value="0">
+		<div id="myDiv"></div>
+
+	<script>
+	var start=0;
+		var x=0;
+		var y=0;
+		var z=0;
+		var smoldiv;
+		var x0, y0, z0, x1, y1, z1, x2, y2, z2, x4, y4, z4, x5, y5, z5, x6, y6, z6;
+
+		let myDiv=document.querySelector("#myDiv");
+		for(let i=0; i<7; i++) {
+			let smoldiv=document.createElement("div");
+			smoldiv.className="difcolor"
+			smoldiv.id="color"+i;
+			myDiv.appendChild(smoldiv);
+		}	
+
+		let difcolor=document.querySelectorAll(".difcolor");
+		let colors=document.querySelectorAll(".colors");
+		let inputColor=document.getElementById('inputColor');
+
+		function setColor(x, y, z) {
+			//console.log( typeof z, typeof x, typeof y)
+			inputColor.value="rgb ("+ x + " "+ y + " " + z + ")";
+			inputColor.style.background = "rgb("+x+", "+y+", "+z+")";
+
+			
+
+			 	x0=parseFloat(x)+((255-x)*0.8);  
+				y0=parseFloat(y)+((255-y)*0.8); 
+				z0=parseFloat(z)+((255-z)*0.8); 
+				console.log(x0)	
+		   document.getElementById('color0').style.background ="rgb("+x0+", "+y0+", "+z0+")";
+			   	x1=parseFloat(x)+((255-x)*0.6);  
+				y1=parseFloat(y)+((255-y)*0.6); 
+				z1=parseFloat(z)+((255-z)*0.6); 
+		   document.getElementById('color1').style.background ="rgb("+x1+", "+y1+", "+z1+")";
+		   		x2=parseFloat(x)+((255-x)*0.3);  
+				y2=parseFloat(y)+((255-y)*0.3); 
+				z2=parseFloat(z)+((255-z)*0.3); 
+		   document.getElementById('color2').style.background ="rgb("+x2+", "+y2+", "+z2+")";
+		   document.getElementById('color3').style.background ="rgb("+x+", "+y+", "+z+")";
+				x4=x*0.8;
+				y4=y*0.8;
+				z4=z*0.8;
+		   document.getElementById('color4').style.background ="rgb("+x4+", "+y4+", "+z4+")";
+				x5=x*0.6;
+				y5=y*0.6;
+				z5=z*0.6;
+		   document.getElementById('color5').style.background ="rgb("+x5+", "+y5+", "+z5+")";
+				x6=x*0.3;
+				y6=y*0.3;
+				z6=z*0.3;
+		   document.getElementById('color6').style.background ="rgb("+x6+", "+y6+", "+z6+")";
+
+
+
+		}
+
+		for(let i=0; i<difcolor.length; i++) {
+			difcolor[i].addEventListener('click', function(event){
+				inputColor.value="";
+				console.log(event.target.id)
+				// if(event.target.id==="color"+i){
+				// 	console.log(typeof (parseFloat("x"+"i")))//
+				// 	p1=parseFloat("x"+"i");
+				// 	p2=parseFloat("y"+"i");
+				// 	p3=parseFloat("z"+"i");
+				// 	inputColor.style.background = "rgb(p1, p2, p3)";					
+				// } This option doesnt work
+				if(event.target.id=="color0"){
+					inputColor.style.background = "rgb("+x0+", "+y0+", "+z0+")";							
+				}
+				if(event.target.id=="color1"){
+				inputColor.style.background = "rgb("+x1+", "+y1+", "+z1+")";					
+				}	
+				if(event.target.id=="color2"){
+				inputColor.style.background = "rgb("+x2+", "+y2+", "+z2+")";					
+				}	
+				if(event.target.id=="color4"){
+				inputColor.style.background = "rgb("+x4+", "+y4+", "+z4+")";				
+				}
+				if(event.target.id=="color3"){
+				inputColor.style.background ="rgb("+x+", "+y+", "+z+")";				
+				}
+				if(event.target.id=="color5"){
+				inputColor.style.background = "rgb("+x5+", "+y5+", "+z5+")";			
+				}
+				if(event.target.id=="color6"){
+				inputColor.style.background = "rgb("+x6+", "+y6+", "+z6+")";			
+				}							
+			})
+		}
+
+		for(let i=0; i<colors.length; i++) {
+			colors[i].addEventListener('change', function(event) {
+				if(event.target.id=="red") {
+					x=event.target.value;
+					setColor(x, y, z);				
+				}
+				if(event.target.id=="green") {
+					y=event.target.value;
+			 		setColor(x, y, z);					
+				}
+				if(event.target.id=="blue") {
+					z=event.target.value;
+			 		setColor(x, y, z);					
+				}
+			});
+		}
+
+
+	</script>
+</body>
+</html>
